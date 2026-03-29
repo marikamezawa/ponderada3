@@ -133,7 +133,7 @@ Em caso de falha no envio (código HTTP diferente de `202`), o firmware aguarda 
   <img src="./assets/conexao-wifi.png" width="800" alt="Conexão Wi-Fi" />
 </p>
 
-###  envios bem-sucedidos 
+###  Envios bem-sucedidos 
 <p align="center">
   <img src="./assets/envio.png" width="800" alt="mensagns sendo enviadas" />
 </p>
