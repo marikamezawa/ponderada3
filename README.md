@@ -134,6 +134,13 @@ Em caso de falha no envio (código HTTP diferente de `202`), o firmware aguarda 
 </p>
 
 ###  Envios bem-sucedidos 
+
+<p align="center">
+  <img src="./assets/logs-backend.jpeg" width="800" alt="mensagns sendo enviadas" />
+</p>
+
+### Requisições HTTP chegando no backend
+
 <p align="center">
   <img src="./assets/envio.png" width="800" alt="mensagns sendo enviadas" />
 </p>
