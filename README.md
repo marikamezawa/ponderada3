@@ -5,9 +5,32 @@
 ---
 
 ## Descrição
-
+ 
 Firmware embarcado para Raspberry Pi Pico W simulado no **Wokwi**, responsável por ler sensores analógicos e digitais via GPIO e enviar telemetrias ao backend desenvolvido na Atividade 1 via HTTP POST.
-
+ 
+---
+ 
+## Contexto de Infraestrutura e Decisões Técnicas
+ 
+### Limitação do Wokwi com localhost
+ 
+O simulador Wokwi opera em uma rede virtual isolada. Por isso, **não é possível acessar serviços rodando em `localhost` ou na rede local da máquina do desenvolvedor diretamente a partir da simulação** — o tráfego HTTP gerado pelo firmware simulado não consegue alcançar endereços privados como `192.168.x.x` ou `127.0.0.1`.
+ 
+O Wokwi oferece uma solução nativa para isso chamada **Wokwi IoT Gateway**, que cria um túnel entre a simulação e a máquina local. No entanto, **esse recurso está disponível apenas no plano pago (Wokwi for Teams / Premium)**, o que inviabilizou seu uso neste contexto acadêmico.
+ 
+### Solução Adotada: Deploy em Instância GCP
+ 
+A alternativa para contornar essa limitação seria expor o backend com uma URL pública acessível pela internet, por exemplo via ferramentas como **ngrok** ou **cloudflared**. Essa abordagem foi tentada, porém encontrou dificuldades de configuração que, somadas ao fato de que o foco da atividade é o firmware embarcado e não a infraestrutura de rede, levaram a buscar outra solução.
+ 
+A estratégia adotada foi contar com o apoio do colega **Murilo Couto**, que estava utilizando a mesma abordagem de simulação. Ele disponibilizou uma instância **Compute Engine do Google Cloud Platform (GCP)** com IP público, onde o backend da Atividade 1 foi executado. Isso permitiu que o firmware simulado no Wokwi enviasse as requisições HTTP POST para um endpoint publicamente acessível, sem restrições de rede.
+ 
+O endpoint utilizado foi:
+```
+http://34.63.6.103:8081/telemetry
+```
+ 
+Essa solução viabilizou a integração completa entre o simulador e o backend, com as evidências de funcionamento documentadas na seção de evidências abaixo.
+ 
 ---
 
 ## Framework Utilizado
